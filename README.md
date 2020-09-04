@@ -29,3 +29,12 @@ Howewer yet, I made it on this way to simply fuse words which definitions may be
 Feel free to reuse the result in the google search bar, and seek for other sections like books or anything else, you may find unexcepted result.
 
 Enjoy the process and leave a comment please, or any advice will be welcomed to guide me for the future.
+
+NOTES: It is not exactly simplifying any scientific two words equation, because I didn't implement any condition to deal with the double letter case, which by default all common letter will be absorbed through the process.
+
+It can be improved for more specific applications, but here is just a prototype, which use may just be to test the search engine with random entries.
+The reliability of the application may depends in the end of the knowledge of the user. If he is trying to fuse uncompatible words, the output may not be good.
+
+I didn't set any string max length, which may be 65535 bytes.
+
+The Idea is to get to know how many words can be fused under the limit. 
