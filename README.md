@@ -38,3 +38,5 @@ The reliability of the application may depends in the end of the knowledge of th
 I didn't set any string max length, which may be 65535 bytes.
 
 The Idea is to get to know how many words can be fused under the limit. 
+
+Since scientist calculus may be boring, don't get bored with the solver part, but try to get the max number of fusion from that prototype operator would be fun to learn the memory management by learning Cpp language.
