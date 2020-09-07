@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -31,7 +30,7 @@ string FuseWord(string word_1, string word_2) {
     return result;
 }
 
-enum Requests {
+enum class Requests {
     noRequest,
     IntroRequest,
     Announcer01,
@@ -46,61 +45,62 @@ enum Requests {
     noReverse,
 };
 
+
 string DyDia(Requests quote, string UserLangEntry) {
-    if (quote == noRequest) {
+    if (quote == Requests::noRequest) {
         return "";
     }
     if (UserLangEntry == "en") {
         switch (quote) {
-            case(IntroRequest):
-                return "Please, choose two words to fuse together: ";
-            case(Announcer01):
-                return "First Word: ";
-            case(confirm01):
-                return " entered";
-            case(Announcer02):
-                return " Second Word: ";
-            case(confirm02):
-                return " second Word entered ready for fusion";
-            case(resultAnnounceBegin):
-                return "The fusion result of the words ";
-            case(transitionResult):
-                return " and ";
-            case(declarationResult):
-                return " is ";
-            case(reverseQuestion):
-                return "Should revert the result ?(press y or n)";
-            case(yesReverse):
-                return "The reverse of the result is: ";
-            case(noReverse):
-                return "Good Bye !";
-            default:
-                return "Invalid quote";
+        case(Requests::IntroRequest):
+            return "Please, choose two words to fuse together: ";
+        case(Requests::Announcer01):
+            return "First Word: ";
+        case(Requests::confirm01):
+            return " entered";
+        case(Requests::Announcer02):
+            return " Second Word: ";
+        case(Requests::confirm02):
+            return " second Word entered ready for fusion";
+        case(Requests::resultAnnounceBegin):
+            return "The fusion result of the words ";
+        case(Requests::transitionResult):
+            return " and ";
+        case(Requests::declarationResult):
+            return " is ";
+        case(Requests::reverseQuestion):
+            return "Should revert the result ?(press y or n)";
+        case(Requests::yesReverse):
+            return "The reverse of the result is: ";
+        case(Requests::noReverse):
+            return "Good Bye !";
+        default:
+            return "Invalid quote";
         }
     }
     else if (UserLangEntry == "fr") {
         switch (quote) {
-        case(IntroRequest):
+        case(Requests::IntroRequest):
             return "Veuillez entrer deux mots que le logiciel fera fusionner: ";
-        case(Announcer01):
+        case(Requests::Announcer01):
             return "Premier mot: ";
-        case(confirm01):
+        case(Requests::confirm01):
             return " a ete enregistre";
-        case(Announcer02):
+        case(Requests::Announcer02):
             return " Deuxieme mot: ";
-        case(confirm02):
+        case(Requests::confirm02):
             return "a ete enregistre pour le processus de fusion.";
-        case(resultAnnounceBegin):
+        case(Requests::resultAnnounceBegin):
             return "La fusion des mots ";
-        case(transitionResult):
+        case(Requests::transitionResult):
             return " et ";
-        case(declarationResult):
+        case(Requests::declarationResult):
             return " est ";
-        case(reverseQuestion):
+        case(Requests::reverseQuestion):
             return "Souhaitez-vous inverser le sens de lecture ?(taper o ou n)";
-        case(yesReverse):
+        case(Requests::yesReverse):
             return "Le resultat inverse donne : ";
-        case(noReverse):
+        case(Requests::noReverse):
             return "Au revoir !";
         default:
             return "citation invalid";
@@ -115,41 +115,41 @@ int main()
     string UserLangEntry;
     cout << "lang option: (francais: fr - anglais: en): ";
     getline(cin, UserLangEntry);
-    Requests quote = noRequest;
+    Requests quote = Requests::noRequest;
     DyDia(quote, UserLangEntry);
-        cout << DyDia(IntroRequest,UserLangEntry) << endl;
-        cout << DyDia(Announcer01, UserLangEntry);
-        getline(cin, word_1);
-        cout << word_1 << DyDia(confirm01, UserLangEntry) << endl;
-        cout << DyDia(Announcer02, UserLangEntry);
-        getline(cin, word_2);
-        cout << word_2 << DyDia(confirm02,UserLangEntry) << endl;
-        string fusedWords = FuseWord(word_1, word_2);
-        cout << DyDia(resultAnnounceBegin, UserLangEntry) << word_1 << DyDia(transitionResult, UserLangEntry);
-        cout<< word_2 << DyDia(declarationResult,UserLangEntry) << fusedWords << endl;
+    cout << DyDia(Requests::IntroRequest, UserLangEntry) << endl;
+    cout << DyDia(Requests::Announcer01, UserLangEntry);
+    getline(cin, word_1);
+    cout << word_1 << DyDia(Requests::confirm01, UserLangEntry) << endl;
+    cout << DyDia(Requests::Announcer02, UserLangEntry);
+    getline(cin, word_2);
+    cout << word_2 << DyDia(Requests::confirm02, UserLangEntry) << endl;
+    string fusedWords = FuseWord(word_1, word_2);
+    cout << DyDia(Requests::resultAnnounceBegin, UserLangEntry) << word_1 << DyDia(Requests::transitionResult, UserLangEntry);
+    cout << word_2 << DyDia(Requests::declarationResult, UserLangEntry) << fusedWords << endl;
 
-        string UserEntry;
+    string UserEntry;
 
-        cout << DyDia(reverseQuestion,UserLangEntry) << endl;
-        getline(cin, UserEntry);
-        if (UserLangEntry == "en") {
-            if (UserEntry == "y" || UserEntry == "Y" | UserEntry == "Yes" || UserEntry == "yes" || UserEntry == "YES") {
-                reverse(fusedWords.begin(), fusedWords.end());
-                cout << DyDia(yesReverse, UserLangEntry) << fusedWords << endl;
-            }
-            else {
-                cout << DyDia(noReverse, UserLangEntry);
-            }
+    cout << DyDia(Requests::reverseQuestion, UserLangEntry) << endl;
+    getline(cin, UserEntry);
+    if (UserLangEntry == "en") {
+        if (UserEntry == "y" || UserEntry == "Y" | UserEntry == "Yes" || UserEntry == "yes" || UserEntry == "YES") {
+            reverse(fusedWords.begin(), fusedWords.end());
+            cout << DyDia(Requests::yesReverse, UserLangEntry) << fusedWords << endl;
         }
-        else if (UserLangEntry == "fr") {
-            if (UserEntry == "o" || "O" || "oui" || "OUI" || "Oui") {
-                reverse(fusedWords.begin(), fusedWords.end());
-                cout << DyDia(yesReverse, UserLangEntry) << fusedWords << endl;
-            }
-            else {
-                cout << DyDia(noReverse, UserLangEntry);
-            }
+        else {
+            cout << DyDia(Requests::noReverse, UserLangEntry);
         }
-        
+    }
+    else if (UserLangEntry == "fr") {
+        if (UserEntry == "o" || UserEntry == "O" || UserEntry == "oui" || UserEntry == "OUI" || UserEntry == "Oui") {
+            reverse(fusedWords.begin(), fusedWords.end());
+            cout << DyDia(Requests::yesReverse, UserLangEntry) << fusedWords << endl;
+        }
+        else {
+            cout << DyDia(Requests::noReverse, UserLangEntry);
+        }
+    }
+
     return 0;
 }
