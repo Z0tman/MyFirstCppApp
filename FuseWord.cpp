@@ -50,7 +50,7 @@ string DyDia(Requests quote, string UserLangEntry) {
     if (quote == Requests::noRequest) {
         return "";
     }
-    if (UserLangEntry == "en") {
+    if (UserLangEntry == "en" && UserLangEntry != "fr") {
         switch (quote) {
         case(Requests::IntroRequest):
             return "Please, choose two words to fuse together: ";
@@ -78,7 +78,7 @@ string DyDia(Requests quote, string UserLangEntry) {
             return "Invalid quote";
         }
     }
-    else if (UserLangEntry == "fr") {
+    else if (UserLangEntry == "fr" && UserLangEntry !="en") {
         switch (quote) {
         case(Requests::IntroRequest):
             return "Veuillez entrer deux mots que le logiciel fera fusionner: ";
@@ -132,24 +132,22 @@ int main()
 
     cout << DyDia(Requests::reverseQuestion, UserLangEntry) << endl;
     getline(cin, UserEntry);
-    if (UserLangEntry == "en") {
+
         if (UserEntry == "y" || UserEntry == "Y" | UserEntry == "Yes" || UserEntry == "yes" || UserEntry == "YES") {
             reverse(fusedWords.begin(), fusedWords.end());
-            cout << DyDia(Requests::yesReverse, UserLangEntry) << fusedWords << endl;
+            cout << DyDia(Requests::yesReverse, "en") << fusedWords << endl;
         }
-        else {
-            cout << DyDia(Requests::noReverse, UserLangEntry);
+        else if(UserLangEntry != "fr"){
+            cout << DyDia(Requests::noReverse, "en");
         }
-    }
-    else if (UserLangEntry == "fr") {
+
         if (UserEntry == "o" || UserEntry == "O" || UserEntry == "oui" || UserEntry == "OUI" || UserEntry == "Oui") {
             reverse(fusedWords.begin(), fusedWords.end());
-            cout << DyDia(Requests::yesReverse, UserLangEntry) << fusedWords << endl;
+            cout << DyDia(Requests::yesReverse, "fr") << fusedWords << endl;
         }
-        else {
-            cout << DyDia(Requests::noReverse, UserLangEntry);
+        else if(UserLangEntry != "en"){
+            cout << DyDia(Requests::noReverse, "fr");
         }
-    }
 
     return 0;
 }
